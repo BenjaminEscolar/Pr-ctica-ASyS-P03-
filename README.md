@@ -1,2 +1,2 @@
-# Pr-ctica-ASyS-P03-
+# Practicas-ASyS
 Repositorio para la Practica P03
