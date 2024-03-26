@@ -1,0 +1,575 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Pr&aacute;ctica 4: Se&ntilde;ales en tiempo continuo</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-03-25">
+<meta name="DC.source" content="Prac4Senal2MV3.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Pr&aacute;ctica 4: Se&ntilde;ales en tiempo continuo</h1>
+<!--introduction-->
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Materia: An&aacute;lisis de se&ntilde;ales y sistemas</a>
+</li>
+<li>
+<a href="#2">Integrantes</a>
+</li>
+<li>
+<a href="#3">1.Problema 3.11-2</a>
+</li>
+<li>
+<a href="#5">2. Problema 3.2-7</a>
+</li>
+<li>
+<a href="#7">3. Problema 3.11-6</a>
+</li>
+<li>
+<a href="#9">4.</a>
+</li>
+<li>
+<a href="#10">Problema 3.1-1 c</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Materia: An&aacute;lisis de se&ntilde;ales y sistemas</h2>
+<p>Grupo: 2MV3</p>
+<h2 id="2">Integrantes</h2>
+<p>Arias Lozano Benjam&iacute;n Axel</p>
+<p>Decena Luna Emiliano Abdala</p>
+<p>Morales Rodr&iacute;guez Francisco Jes&uacute;s</p>
+<p>Soriano L&oacute;pez Ar&oacute;n</p>
+<p>T&eacute;llez Camacho Ian Joseph</p>
+<h2 id="3">1.Problema 3.11-2</h2>
+<p>Definici&oacute;n de la funci&oacute;n f como funci&oacute;n an&oacute;nima</p>
+<pre class="codeinput">f = @(n) exp(-n/5) .* cos(pi*n/5) .* (n &gt;= 0);
+
+<span class="comment">% C&aacute;lculo de f(n/2) para -10 &lt;= n &lt;= 10</span>
+x = linspace(-10 - 1/2, 10 + 1/2, 1001);
+y = f(x/2);
+
+<span class="comment">% Gr&aacute;fica de la funci&oacute;n</span>
+plot(x, y, <span class="string">'b-'</span>, <span class="string">'LineWidth'</span>, 2)
+grid <span class="string">on</span>;
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'f(n/2)'</span>);
+title(<span class="string">'Funci&oacute;n f(n/2) con upsampling y centrada en el origen'</span>);
+
+<span class="comment">% Mostrar valores espec&iacute;ficos</span>
+disp([<span class="string">'f(-5/2) = '</span>, num2str(f(-5/2))]);
+disp([<span class="string">'f(-3/2) = '</span>, num2str(f(-3/2))]);
+disp([<span class="string">'f(-1/2) = '</span>, num2str(f(-1/2))]);
+disp([<span class="string">'f(1/2) = '</span>, num2str(f(1/2))]);
+disp([<span class="string">'f(3/2) = '</span>, num2str(f(3/2))]);
+disp([<span class="string">'f(5/2) = '</span>, num2str(f(5/2))]);
+</pre>
+<pre class="codeoutput">f(-5/2) = 0
+f(-3/2) = 0
+f(-1/2) = 0
+f(1/2) = 0.86055
+f(3/2) = 0.43544
+f(5/2) = 3.7139e-17
+</pre>
+<img vspace="5" hspace="5" src="Prac4Senal2MV3_01.png" alt=""> <h2 id="5">2. Problema 3.2-7</h2>
+<p>Definir los puntos de la se&ntilde;al discreta</p>
+<pre class="codeinput">x = [0 1 2 3 4 5 6];
+y = [0 1 2 3 2 1 0];
+
+stem(x, y, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'b'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'b'</span>)
+
+<span class="comment">% Establecer el rango de los ejes</span>
+xlim([-1 7]);
+ylim([-1 4]);
+
+grid <span class="string">on</span>;
+
+title(<span class="string">'x[n]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[n]'</span>);
+
+<span class="comment">% Aplicar transformaciones</span>
+
+<span class="comment">% (a) x[-n]: Reflejo de la se&ntilde;al respecto al eje vertical</span>
+figure;
+x_b = x - 6;
+y_b = y;
+stem(x_b, y_b, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'r'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'g'</span>)
+grid <span class="string">on</span>;
+title(<span class="string">'x[-n]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[-n]'</span>);
+
+<span class="comment">% (b) x[n+6]: Desplazamiento hacia la izquierda en 6 unidades</span>
+figure;
+x_b = x - 6;
+y_b = y;
+stem(x_b, y_b, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'g'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'g'</span>)
+grid <span class="string">on</span>;
+title(<span class="string">'x[n+6]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[n+6]'</span>);
+
+<span class="comment">% (c) x[n-6]: Desplazamiento hacia la derecha en 6 unidades</span>
+figure;
+x_c = x + 6;
+y_c = y;
+stem(x_c, y_c, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'b'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'b'</span>)
+grid <span class="string">on</span>;
+title(<span class="string">'x[n-6]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[n-6]'</span>);
+
+<span class="comment">% (d) x[3n]: Compresi&oacute;n en el eje n por un factor de 3</span>
+figure;
+x_d = -1:6;
+y_d = [0 0 3 0 0 0 0 0];
+stem(x_d, y_d, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'m'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'m'</span>)
+grid <span class="string">on</span>;
+title(<span class="string">'x[3n]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[3n]'</span>);
+
+<span class="comment">% (e) x[n/3]: Expansi&oacute;n en el eje n por un factor de 3</span>
+figure;
+x_e = x * 3;
+y_e = y;
+stem(x_e, y_e, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'c'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'c'</span>)
+grid <span class="string">on</span>;
+title(<span class="string">'x[n/3]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[n/3]'</span>);
+
+<span class="comment">% (f) x[3-n]: Reflejo respecto al eje horizontal y desplazamiento hacia la derecha en 3 unidades</span>
+figure;
+x_f = 3 - x;
+y_f = y;
+stem(x_f, y_f, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'y'</span>, <span class="string">'MarkerEdgeColor'</span>, <span class="string">'y'</span>)
+grid <span class="string">on</span>;
+title(<span class="string">'x[3-n]'</span>);
+xlabel(<span class="string">'n'</span>);
+ylabel(<span class="string">'x[3-n]'</span>);
+</pre>
+<img vspace="5" hspace="5" src="Prac4Senal2MV3_02.png" alt=""> <img vspace="5" hspace="5" src="Prac4Senal2MV3_03.png" alt=""> <img vspace="5" hspace="5" src="Prac4Senal2MV3_04.png" alt=""> <img vspace="5" hspace="5" src="Prac4Senal2MV3_05.png" alt=""> <img vspace="5" hspace="5" src="Prac4Senal2MV3_06.png" alt=""> <img vspace="5" hspace="5" src="Prac4Senal2MV3_07.png" alt=""> <img vspace="5" hspace="5" src="Prac4Senal2MV3_08.png" alt=""> <h2 id="7">3. Problema 3.11-6</h2>
+<p>Instrucciones:</p>
+<p>Supongamos que existe un vector X en el espacio de trabajo de Matlab, correspondiente a una se&ntilde;al DT de duraci&oacute;n finifta x[n].</p>
+<p>a)Escriba una funci&oacute;n en Matlab que, cuando se le pase el vector X, calcule y devuelva Ex, la energ&iacute;a de x[n].</p>
+<p>b)Escriba una funci&oacute;n en Matlab que, cuando se le pase el vector X, calcule y devuelva Px, la potencia de x[n]. Supongamos que x[n] es peri&oacute;dico y que el vector x contiene datos para un n&uacute;mero entero de periodos de x[n]. clearvars sympref('HeavisideAtOrigin',1);</p>
+<p>a=input('Ingrese la dimensi&oacute;n del vector: ') for i=1:1:a fprintf('Ingrese un valor en la posici&oacute;n %d',i); n(i)=input(':'); end</p>
+<pre class="codeinput">x= @(n) (exp(-n/5) .* cos(pi*n/5) .* (n &gt;= 0));
+n=-10:10;
+figure
+title(<span class="string">'x[n]'</span>);
+stem(n,x(n))
+grid <span class="string">on</span>
+fprintf(<span class="string">'La energia de la se&ntilde;al es: '</span>)
+E=sum(x(n).^2)
+fprintf(<span class="string">'Si suponemos que la se&ntilde;al es periodica podemos usar la sig. formula\n'</span>)
+fprintf(<span class="string">'La potencia es: '</span>)
+N=10;
+<span class="keyword">for</span> (n=0:1:N-1)
+P=(1/N).*sqrt(x(n)).^2
+<span class="keyword">end</span>
+</pre>
+<pre class="codeoutput">La energia de la se&ntilde;al es: 
+E =
+
+    1.8832
+
+Si suponemos que la se&ntilde;al es periodica podemos usar la sig. formula
+La potencia es: 
+P =
+
+    0.1000
+
+
+P =
+
+    0.0662
+
+
+P =
+
+    0.0207
+
+
+P =
+
+   -0.0170
+
+
+P =
+
+   -0.0364
+
+
+P =
+
+   -0.0368
+
+
+P =
+
+   -0.0244
+
+
+P =
+
+   -0.0076
+
+
+P =
+
+    0.0062
+
+
+P =
+
+    0.0134
+
+</pre>
+<img vspace="5" hspace="5" src="Prac4Senal2MV3_09.png" alt=""> <h2 id="9">4.</h2>
+<h2 id="10">Problema 3.1-1 c</h2>
+<p>Find the energy of the signal depicted in Fig.P3.1-1c</p>
+<pre class="codeinput">
+<span class="comment">% Fig.P3.1-1c</span>
+
+
+<span class="comment">% &lt;&lt;P3.1-1c.PNG&gt;&gt;</span>
+
+<span class="comment">% Por la naturaleza de la se&ntilde;al podemos definir este intervalo</span>
+n = -3:3;
+sympref(<span class="string">'HeavisideAtOrigin'</span>,1);
+<span class="comment">% Hacemos an&oacute;nima a la funcion</span>
+xn = @(n) 3*n.*(heaviside(n+3)-heaviside(n-4));
+
+<span class="comment">% Revisando el ejercicio 3 la formula para el c&aacute;lculo general de la energ&iacute;a de una se&ntilde;al</span>
+<span class="comment">% discreta finita ser&aacute;: E=(sum(f(n).^2) con el intervalo n definido</span>
+<span class="comment">%Aplicamos la formula para la se&ntilde;al xn, y obtenemos</span>
+
+Exn = sum(xn(n).^2)
+
+<span class="comment">% Problema 3.1-2</span>
+<span class="comment">% 3.1-2 Find the power of the signals illustrated in Fig.P3.1-2.</span>
+
+<span class="comment">%Fig.P3.1-2.</span>
+
+<span class="comment">% &lt;&lt;P3.1-2b.PNG&gt;&gt;</span>
+
+<span class="comment">%Como se observa que la funcion es periodica podemos definir la se&ntilde;al en el</span>
+<span class="comment">%intervalo de 0 hasta No-1, pero para fines pr&aacute;cticos la definiremos en (-3,8)</span>
+
+sympref(<span class="string">'HeavisideAtOrigin'</span>,1);
+
+n1 = -3:8;
+<span class="comment">% Esto por que No = 12</span>
+No = 12
+xn1 =@(n1)  n1.*(heaviside(n1+3)-heaviside(n1-4)); <span class="comment">%Por el heaviside lo demas se hace cero</span>
+<span class="comment">%Formula para encontar potencia de una se&ntilde;al real periodica aplicada a la</span>
+<span class="comment">%se&ntilde;al xn1</span>
+Px = (sum(abs(xn1(n1)).^2))/No
+</pre>
+<pre class="codeoutput">
+Exn =
+
+   252
+
+
+No =
+
+    12
+
+
+Px =
+
+    2.3333
+
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Práctica 4: Señales en tiempo continuo
+%
+%
+%% Materia: Análisis de señales y sistemas
+% Grupo: 2MV3
+%
+%% Integrantes 
+% Arias Lozano Benjamín Axel
+%
+% Decena Luna Emiliano Abdala
+%
+% Morales Rodríguez Francisco Jesús
+%
+% Soriano López Arón 
+%
+% Téllez Camacho Ian Joseph
+%% 1.Problema 3.11-2
+%
+%
+%%
+% Definición de la función f como función anónima
+f = @(n) exp(-n/5) .* cos(pi*n/5) .* (n >= 0);
+
+% Cálculo de f(n/2) para -10 <= n <= 10
+x = linspace(-10 - 1/2, 10 + 1/2, 1001);
+y = f(x/2);
+
+% Gráfica de la función
+plot(x, y, 'b-', 'LineWidth', 2)
+grid on;
+xlabel('n');
+ylabel('f(n/2)');
+title('Función f(n/2) con upsampling y centrada en el origen');
+
+% Mostrar valores específicos
+disp(['f(-5/2) = ', num2str(f(-5/2))]);
+disp(['f(-3/2) = ', num2str(f(-3/2))]);
+disp(['f(-1/2) = ', num2str(f(-1/2))]);
+disp(['f(1/2) = ', num2str(f(1/2))]);
+disp(['f(3/2) = ', num2str(f(3/2))]);
+disp(['f(5/2) = ', num2str(f(5/2))]);
+%% 2. Problema 3.2-7
+% 
+%
+%%
+% Definir los puntos de la señal discreta
+x = [0 1 2 3 4 5 6];
+y = [0 1 2 3 2 1 0];
+
+stem(x, y, 'filled', 'MarkerFaceColor', 'b', 'MarkerEdgeColor', 'b')
+
+% Establecer el rango de los ejes
+xlim([-1 7]);
+ylim([-1 4]);
+
+grid on;
+
+title('x[n]');
+xlabel('n');
+ylabel('x[n]');
+
+% Aplicar transformaciones
+
+% (a) x[-n]: Reflejo de la señal respecto al eje vertical
+figure;
+x_b = x - 6;
+y_b = y;
+stem(x_b, y_b, 'filled', 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'g')
+grid on;
+title('x[-n]');
+xlabel('n');
+ylabel('x[-n]');
+
+% (b) x[n+6]: Desplazamiento hacia la izquierda en 6 unidades
+figure;
+x_b = x - 6;
+y_b = y;
+stem(x_b, y_b, 'filled', 'MarkerFaceColor', 'g', 'MarkerEdgeColor', 'g')
+grid on;
+title('x[n+6]');
+xlabel('n');
+ylabel('x[n+6]');
+
+% (c) x[n-6]: Desplazamiento hacia la derecha en 6 unidades
+figure;
+x_c = x + 6;
+y_c = y;
+stem(x_c, y_c, 'filled', 'MarkerFaceColor', 'b', 'MarkerEdgeColor', 'b')
+grid on;
+title('x[n-6]');
+xlabel('n');
+ylabel('x[n-6]');
+
+% (d) x[3n]: Compresión en el eje n por un factor de 3
+figure;
+x_d = -1:6;
+y_d = [0 0 3 0 0 0 0 0]; 
+stem(x_d, y_d, 'filled', 'MarkerFaceColor', 'm', 'MarkerEdgeColor', 'm')
+grid on;
+title('x[3n]');
+xlabel('n');
+ylabel('x[3n]');
+
+% (e) x[n/3]: Expansión en el eje n por un factor de 3
+figure;
+x_e = x * 3;
+y_e = y;
+stem(x_e, y_e, 'filled', 'MarkerFaceColor', 'c', 'MarkerEdgeColor', 'c')
+grid on;
+title('x[n/3]');
+xlabel('n');
+ylabel('x[n/3]');
+
+% (f) x[3-n]: Reflejo respecto al eje horizontal y desplazamiento hacia la derecha en 3 unidades
+figure;
+x_f = 3 - x;
+y_f = y;
+stem(x_f, y_f, 'filled', 'MarkerFaceColor', 'y', 'MarkerEdgeColor', 'y')
+grid on;
+title('x[3-n]');
+xlabel('n');
+ylabel('x[3-n]');
+%% 3. Problema 3.11-6
+% 
+%
+%% 
+% Instrucciones: 
+% 
+% Supongamos que existe un vector X en el espacio de trabajo de Matlab,
+% correspondiente a una señal DT de duración finifta x[n].
+% 
+% a)Escriba una función en Matlab que, cuando se le pase el vector X,
+% calcule y devuelva Ex, la energía de x[n]. 
+% 
+% b)Escriba una función en Matlab que, cuando se le pase el vector X,
+% calcule y devuelva Px, la potencia de x[n]. Supongamos que x[n] es
+% periódico y que el vector x contiene datos para un número entero de
+% periodos de x[n].
+% clearvars
+% sympref('HeavisideAtOrigin',1);
+% 
+% a=input('Ingrese la dimensión del vector: ')
+% for i=1:1:a
+%     fprintf('Ingrese un valor en la posición %d',i);
+%     n(i)=input(':');
+% end 
+x= @(n) (exp(-n/5) .* cos(pi*n/5) .* (n >= 0));
+n=-10:10;
+figure
+title('x[n]');
+stem(n,x(n))
+grid on 
+fprintf('La energia de la señal es: ')
+E=sum(x(n).^2) 
+fprintf('Si suponemos que la señal es periodica podemos usar la sig. formula\n')
+fprintf('La potencia es: ')
+N=10;
+for (n=0:1:N-1)
+P=(1/N).*sqrt(x(n)).^2
+end 
+%% 4. 
+%
+%
+%% Problema 3.1-1 c
+% Find the energy of the signal depicted in Fig.P3.1-1c
+
+
+% Fig.P3.1-1c 
+
+
+% <<P3.1-1c.PNG>>
+
+% Por la naturaleza de la señal podemos definir este intervalo
+n = -3:3;
+sympref('HeavisideAtOrigin',1);
+% Hacemos anónima a la funcion
+xn = @(n) 3*n.*(heaviside(n+3)-heaviside(n-4)); 
+
+% Revisando el ejercicio 3 la formula para el cálculo general de la energía de una señal
+% discreta finita será: E=(sum(f(n).^2) con el intervalo n definido
+%Aplicamos la formula para la señal xn, y obtenemos 
+
+Exn = sum(xn(n).^2)
+
+% Problema 3.1-2 
+% 3.1-2 Find the power of the signals illustrated in Fig.P3.1-2.
+
+%Fig.P3.1-2.
+
+% <<P3.1-2b.PNG>>
+
+%Como se observa que la funcion es periodica podemos definir la señal en el
+%intervalo de 0 hasta No-1, pero para fines prácticos la definiremos en (-3,8)
+
+sympref('HeavisideAtOrigin',1);
+
+n1 = -3:8; 
+% Esto por que No = 12
+No = 12
+xn1 =@(n1)  n1.*(heaviside(n1+3)-heaviside(n1-4)); %Por el heaviside lo demas se hace cero
+%Formula para encontar potencia de una señal real periodica aplicada a la
+%señal xn1
+Px = (sum(abs(xn1(n1)).^2))/No  
+
+##### SOURCE END #####
+-->
+</body>
+</html>
